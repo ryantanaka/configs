@@ -1,0 +1,7 @@
+[user]
+	email = ryanyt@hawaii.edu
+	name = ryan
+[core]
+	editor = vim
+[alias]
+	logs = log --graph --decorate --all --oneline
