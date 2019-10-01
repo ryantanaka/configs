@@ -6,6 +6,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/goyo.vim'
 call plug#end()
 
 filetype plugin indent on
