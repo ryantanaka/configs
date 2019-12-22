@@ -5,9 +5,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/seoul256.vim'
+Plug 'chriskempson/base16-vim'
 Plug 'junegunn/goyo.vim'
 call plug#end()
+
+set termguicolors
+
+colorscheme base16-default-dark
 
 filetype plugin indent on
 " show existing tab with 4 spaces width
@@ -22,9 +26,6 @@ set number
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
-"
-"Unified color scheme(default: dark)
-colo seoul256
 
 " change bracket match color
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
