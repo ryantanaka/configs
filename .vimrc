@@ -12,7 +12,7 @@ call plug#end()
 
 set termguicolors
 " colorscheme base16-solarized-light
-colorscheme base16-default-dark
+colorscheme base16-tomorrow-night-eighties
 
 filetype plugin indent on
 " show existing tab with 4 spaces width
