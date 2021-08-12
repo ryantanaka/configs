@@ -7,10 +7,11 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 call plug#end()
 
 set termguicolors
-
+" colorscheme base16-solarized-light
 colorscheme base16-default-dark
 
 filetype plugin indent on
@@ -32,3 +33,5 @@ hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 
 " show the ruler
 set ruler
+
+set backspace=indent,eol,start

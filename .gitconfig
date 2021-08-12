@@ -1,7 +1,11 @@
 [user]
-	email = tanaka@isi.edu 
+	email = tanaka@isi.edu
 	name = Ryan Tanaka
 [core]
 	editor = vim
 [alias]
-	logs = log --graph --decorate --all --oneline
+    logo = log --oneline --graph --decorate --all
+    logs = log --pretty=short --graph --decorate --all
+[filesystem "Oracle Corporation|13|/dev/disk1s1"]
+	timestampResolution = 7000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
