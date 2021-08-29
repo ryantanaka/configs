@@ -22,6 +22,7 @@ Plug 'vim-utils/vim-man'
 "   :Rg <pattern>
 Plug 'jremmen/vim-ripgrep'
 
+" Plug 'Valloric/YouCompleteMe'
 " TODO: address later 
 " Plug 'junegunn/goyo.vim'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -44,6 +45,7 @@ set nowrap
 set smartcase
 set noswapfile
 set colorcolumn=80
+set cursorline
 
 " keep an undo directory
 if !isdirectory($HOME."/.vim")
