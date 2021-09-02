@@ -1,4 +1,4 @@
-" kPLUGINS #####################################################################
+" PLUGINS #####################################################################
 " setup vim-plug if not already installed
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -45,7 +45,8 @@ set nowrap
 set smartcase
 set noswapfile
 set colorcolumn=80
-set cursorline
+set backspace=indent,eol,start
+set relativenumber
 
 " keep an undo directory
 if !isdirectory($HOME."/.vim")
