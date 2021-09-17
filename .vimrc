@@ -30,6 +30,7 @@ call plug#end()
 
 " COLORSCHEME #################################################################
 colorscheme gruvbox
+set termguicolors
 set background=dark
 let g:gruvbox_contrast_dark='(medium)'
 
@@ -87,3 +88,6 @@ nnoremap <leader>ps :Rg<SPACE>
 nnoremap <silent> <leader>+ :vertical resize +5<CR>
 nnoremap <silent> <leader>- :vertical resize -5<CR>
 
+" j,k store relative line number jumps in the jumplist
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
