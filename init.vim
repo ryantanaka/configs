@@ -1,11 +1,4 @@
 " PLUGINS #####################################################################
-" setup vim-plug if not already installed
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 call plug#begin('~/.vim/plugged')
 " gruvbox color scheme
 Plug 'morhetz/gruvbox'
@@ -40,10 +33,10 @@ set relativenumber
 
 " keep an undo directory
 if !isdirectory($HOME."/.vim")
-call mkdir($HOME."/.vim", "", 0770)
+    call mkdir($HOME."/.vim", "", 0770)
 endif
 if !isdirectory($HOME."/.vim/undo-dir")
-call mkdir($HOME."/.vim/undo-dir", "", 0700)
+    call mkdir($HOME."/.vim/undo-dir", "", 0700)
 endif
 set undodir=~/.vim/undodir
 set undofile
@@ -53,7 +46,7 @@ set incsearch
 
 " let RipGrep derive root from git project root
 if executable('rg')
-let g:rg_derive_root='true'
+    let g:rg_derive_root='true'
 endif
 
 let g:netrw_browse_split=2
@@ -71,7 +64,7 @@ nnoremap <leader>l :wincmd l<CR>
 
 " convenient project search
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <leader>ps :Rg!<space>
+nnoremap <leader>ps :Rg<SPACE>
 
 " vertical resizing 
 nnoremap <silent> <leader>+ :vertical resize +5<CR>
