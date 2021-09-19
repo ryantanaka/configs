@@ -63,8 +63,16 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 
 " convenient project search
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+" open file tree
+nnoremap <leader>pt :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+" ripgrep 
 nnoremap <leader>ps :Rg<SPACE>
+" fzf
+nnoremap <leader>pf :Files<SPACE>
+nnoremap <leader>pg :GFiles<SPACE>
+
+" convenient buffer switching
+nnoremap <leader>b :b<SPACE>
 
 " vertical resizing 
 nnoremap <silent> <leader>+ :vertical resize +5<CR>
