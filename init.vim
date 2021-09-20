@@ -66,10 +66,10 @@ nnoremap <leader>l :wincmd l<CR>
 " open file tree
 nnoremap <leader>pt :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 " ripgrep 
-nnoremap <leader>ps :Rg<SPACE>
+nnoremap <leader>ps :Rg<CR>
 " fzf
 nnoremap <leader>pf :Files<SPACE>
-nnoremap <leader>pg :GFiles<SPACE>
+nnoremap <leader>pg :GFiles<CR>
 
 " convenient buffer switching
 nnoremap <leader>b :b<SPACE>
