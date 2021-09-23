@@ -3,8 +3,7 @@ call plug#begin('~/.vim/plugged')
 " gruvbox color scheme
 Plug 'morhetz/gruvbox'
 
-" TODO: address later 
-" Plug 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " Plug 'mbbill/undotree'
