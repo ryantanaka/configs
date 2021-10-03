@@ -22,13 +22,13 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
-set nu
 set nowrap
 set smartcase
 set noswapfile
 set colorcolumn=80
 set backspace=indent,eol,start
 set relativenumber
+set number
 
 " keep an undo directory
 if !isdirectory($HOME."/.vim")
@@ -55,28 +55,50 @@ let g:netrw_winsize=25
 " set leader key to be SPACEBAR
 let mapleader=" "
 
-" set movement amongst splits
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
+" toggle number and relativenumber
+:function ToggleLineNumbers()
+: set number!
+: set relativenumber!
+:endfunction
 
-" convenient project search
+nnoremap <leader>r :call ToggleLineNumbers()<CR>
+
 " open file tree
 nnoremap <leader>pt :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+
 " ripgrep 
 nnoremap <leader>ps :Rg<CR>
+
 " fzf
+" use TAB to select multiple files
+" use CTRL-x to open selection in horizontal split
+" use CTRL-v to open selection in vertical split
 nnoremap <leader>pf :Files<SPACE>
 nnoremap <leader>pg :GFiles<CR>
 
-" convenient buffer switching
+" convenient buffer switching (hit TAB to cycle through tabs)
 nnoremap <leader>b :b<SPACE>
 
+" set movement amongst splits
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
+
 " vertical resizing 
-nnoremap <silent> <leader>+ :vertical resize +5<CR>
-nnoremap <silent> <leader>- :vertical resize -5<CR>
+nnoremap <silent> <leader>+ :vertical resize +10<CR>
+nnoremap <silent> <leader>- :vertical resize -10<CR>
+
+" max out current vertical pane
+nnoremap <silent><leader><bar> :wincmd <bar> <CR>
+
+" max out current horizontal pane
+nnoremap <silent><leader>_ :wincmd _ <CR>
+
+" normalize panes
+nnoremap <silent> <leader>= :wincmd = <CR>
 
 " j,k store relative line number jumps in the jumplist
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+
