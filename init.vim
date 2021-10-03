@@ -61,10 +61,10 @@ let mapleader=" "
 : set relativenumber!
 :endfunction
 
-nnoremap <leader>r :call ToggleLineNumbers()<CR>
+nnoremap <silent><leader>r :call ToggleLineNumbers()<CR>
 
 " start up Goyo (focus mode) 
-nnoremap <leader>g :Goyo<CR> :call ToggleLineNumbers()<CR>
+nnoremap <silent><leader>g :Goyo<CR> :call ToggleLineNumbers()<CR>
 
 " open file tree
 nnoremap <leader>pt :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
