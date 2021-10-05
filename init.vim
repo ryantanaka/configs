@@ -1,8 +1,6 @@
 " PLUGINS #####################################################################
 call plug#begin('~/.vim/plugged')
-" gruvbox color scheme
 Plug 'morhetz/gruvbox'
-
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
