@@ -53,12 +53,16 @@ let g:netrw_winsize=25
 " set leader key to be SPACEBAR
 let mapleader=" "
 
+" turn of highlights (after searching)
+nnoremap <silent><leader>h :noh<CR>
+
 " toggle number and relativenumber
 :function ToggleLineNumbers()
 : set number!
 : set relativenumber!
 :endfunction
 
+" toggle number and relative number shortcut
 nnoremap <silent><leader>r :call ToggleLineNumbers()<CR>
 
 " start up Goyo (focus mode) 
