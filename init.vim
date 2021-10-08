@@ -69,17 +69,17 @@ nnoremap <silent><leader>r :call ToggleLineNumbers()<CR>
 nnoremap <silent><leader>g :Goyo<CR> :call ToggleLineNumbers()<CR>
 
 " open file tree
-nnoremap <leader>pt :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <leader>t :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 
 " ripgrep 
-nnoremap <leader>ps :Rg<CR>
+nnoremap <leader>s :Rg<CR>
 
 " fzf
 " use TAB to select multiple files
 " use CTRL-x to open selection in horizontal split
 " use CTRL-v to open selection in vertical split
-nnoremap <leader>pf :Files<SPACE>
-nnoremap <leader>pg :GFiles<CR>
+nnoremap <leader>f :Files<SPACE>
+nnoremap <leader>p :GFiles<CR>
 
 " convenient buffer switching (hit TAB to cycle through tabs)
 nnoremap <leader>b :b<SPACE>
