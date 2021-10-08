@@ -84,6 +84,9 @@ nnoremap <leader>p :GFiles<CR>
 " convenient buffer switching (hit TAB to cycle through tabs)
 nnoremap <leader>b :b<SPACE>
 
+" set fzf preview window border color
+let g:fzf_colors = {"border": ["fg", "Comment"]}
+
 " set movement amongst splits
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
