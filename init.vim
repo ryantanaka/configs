@@ -8,10 +8,10 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " COLORSCHEME #################################################################
-colorscheme gruvbox
 set termguicolors
 set background=dark
-let g:gruvbox_contrast_dark='(medium)'
+let g:gruvbox_contrast_dark='medium'
+colorscheme gruvbox
 
 " CONFIGURATION ###############################################################
 syntax on 
