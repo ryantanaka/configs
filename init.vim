@@ -1,17 +1,35 @@
 " PLUGINS #####################################################################
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
 Plug 'junegunn/goyo.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'windwp/nvim-autopairs'
+Plug 'lukas-reineke/indent-blankline.nvim'
+
+" gcc to comment line (takes a count)
+" gc to comment out target of motion (or in visual mode)
+" use same operation to uncomment
+Plug 'tpope/vim-commentary'
+
 " Plug 'mbbill/undotree'
 call plug#end()
 
+" setup autopairs to autocomplete ({[ etc
+lua require('nvim-autopairs').setup{}
+
 " COLORSCHEME #################################################################
-set termguicolors
+if has('termguicolors')
+  set termguicolors
+endif
+
 set background=dark
-let g:gruvbox_contrast_dark='medium'
-colorscheme gruvbox
+let g:gruvbox_material_background='medium'
+let g:gruvbox_material_ui_contrast = 'high'
+colorscheme gruvbox-material
 
 " CONFIGURATION ###############################################################
 syntax on 
@@ -65,27 +83,25 @@ nnoremap <silent><leader>h :noh<CR>
 " toggle number and relative number shortcut
 nnoremap <silent><leader>r :call ToggleLineNumbers()<CR>
 
+" set indent guide to off by default
+let g:indent_blankline_enabled = v:false
+" toggle indent guide
+nnoremap <silent><leader>i :IndentBlanklineToggle<CR>
+
 " start up Goyo (focus mode) 
 nnoremap <silent><leader>g :Goyo<CR> :call ToggleLineNumbers()<CR>
 
 " open file tree
 nnoremap <leader>t :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 
-" ripgrep 
-nnoremap <leader>s :Rg<CR>
-
-" fzf
-" use TAB to select multiple files
-" use CTRL-x to open selection in horizontal split
-" use CTRL-v to open selection in vertical split
-nnoremap <leader>f :Files<SPACE>
-nnoremap <leader>p :GFiles<CR>
-
 " convenient buffer switching (hit TAB to cycle through tabs)
 nnoremap <leader>b :b<SPACE>
 
-" set fzf preview window border color
-let g:fzf_colors = {"border": ["fg", "Comment"]}
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " set movement amongst splits
 nmap <silent> <c-k> :wincmd k<CR>
@@ -109,4 +125,23 @@ nnoremap <silent> <leader>= :wincmd = <CR>
 " j,k store relative line number jumps in the jumplist
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+
+" tree-sitter syntax highlighting
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    custom_captures = {
+      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+      ["foo.bar"] = "Identifier",
+    },
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
 
