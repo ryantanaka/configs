@@ -9,8 +9,9 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 " gc to comment out target of motion (or in visual mode)
 " use same operation to uncomment
 Plug 'tpope/vim-commentary'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'shaunsingh/nord.nvim'
 
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
 " Plug 'mbbill/undotree'
 call plug#end()
 
@@ -18,13 +19,12 @@ call plug#end()
 lua require('nvim-autopairs').setup{}
 
 " COLORSCHEME #################################################################
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
+set termguicolors
 
-colorscheme onehalfdark
+let g:nord_borders=v:true
+let g:nord_italic=v:true
+
+colorscheme nord
 " CONFIGURATION ###############################################################
 syntax on 
 set noerrorbells
@@ -38,6 +38,7 @@ set noswapfile
 set colorcolumn=80
 set backspace=indent,eol,start
 set relativenumber
+set ruler
 set number
 
 " keep an undo directory
@@ -83,7 +84,7 @@ let g:indent_blankline_enabled = v:false
 nnoremap <silent><leader>i :IndentBlanklineToggle<CR>
 
 " start up Goyo (focus mode) 
-nnoremap <silent><leader>g :Goyo<CR> :call ToggleLineNumbers()<CR>
+nnoremap <silent><leader>g :Goyo<CR>
 
 " open file tree
 nnoremap <leader>t :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
@@ -119,3 +120,20 @@ nnoremap <silent> <leader>= :wincmd = <CR>
 " j,k store relative line number jumps in the jumplist
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    custom_captures = {
+      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+      ["foo.bar"] = "Identifier",
+    },
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
