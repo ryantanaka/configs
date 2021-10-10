@@ -3,17 +3,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/goyo.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'sainnhe/gruvbox-material'
 " gcc to comment line (takes a count)
 " gc to comment out target of motion (or in visual mode)
 " use same operation to uncomment
 Plug 'tpope/vim-commentary'
 
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 " Plug 'mbbill/undotree'
 call plug#end()
 
@@ -21,14 +18,13 @@ call plug#end()
 lua require('nvim-autopairs').setup{}
 
 " COLORSCHEME #################################################################
-if has('termguicolors')
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 
-let g:gruvbox_material_background='medium'
-let g:gruvbox_material_palette='material'
-colorscheme gruvbox-material
-
+colorscheme onehalfdark
 " CONFIGURATION ###############################################################
 syntax on 
 set noerrorbells
@@ -123,23 +119,3 @@ nnoremap <silent> <leader>= :wincmd = <CR>
 " j,k store relative line number jumps in the jumplist
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
-
-" tree-sitter syntax highlighting
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
-EOF
-
-
