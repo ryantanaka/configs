@@ -1,7 +1,6 @@
 " PLUGINS #####################################################################
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/goyo.vim'
-Plug 'sainnhe/gruvbox-material'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
@@ -9,7 +8,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'lukas-reineke/indent-blankline.nvim'
-
+Plug 'sainnhe/gruvbox-material'
 " gcc to comment line (takes a count)
 " gc to comment out target of motion (or in visual mode)
 " use same operation to uncomment
@@ -26,9 +25,8 @@ if has('termguicolors')
   set termguicolors
 endif
 
-set background=dark
 let g:gruvbox_material_background='medium'
-let g:gruvbox_material_ui_contrast = 'high'
+let g:gruvbox_material_palette='material'
 colorscheme gruvbox-material
 
 " CONFIGURATION ###############################################################
@@ -37,7 +35,7 @@ set noerrorbells
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
-set smartindent
+set smartindent 
 set nowrap
 set smartcase
 set noswapfile
