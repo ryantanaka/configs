@@ -7,8 +7,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tpope/vim-commentary' " gcc to cmt line (takes count), gc to comment target of motion (or visual)
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
-Plug 'mcchrish/zenbones.nvim'
-Plug 'rktjmp/lush.nvim'
+Plug 'tomasiser/vim-code-dark'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'mbbill/undotree'
@@ -181,8 +180,8 @@ EOF
 
 " COLORSCHEME #################################################################
 set termguicolors
-let g:zenflesh_lighten_noncurrent_window=v:true
-colorscheme zenflesh-lush
+let g:codedark_conservative=0
+colorscheme codedark
 
 " CONFIGURATION ###############################################################
 syntax on 
