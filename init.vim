@@ -7,8 +7,9 @@ Plug 'windwp/nvim-autopairs'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tpope/vim-commentary' " gcc to cmt line (takes count), gc to comment target of motion (or visual)
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
-Plug 'tomasiser/vim-code-dark'
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'EdenEast/nightfox.nvim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'akinsho/bufferline.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'mbbill/undotree'
 call plug#end()
@@ -178,10 +179,11 @@ require'nvim-tree'.setup {
 }
 EOF
 
+lua require("bufferline").setup{}
+
 " COLORSCHEME #################################################################
 set termguicolors
-let g:codedark_conservative=0
-colorscheme codedark
+colorscheme nordfox
 
 " CONFIGURATION ###############################################################
 syntax on 
@@ -278,3 +280,6 @@ nnoremap <leader>tr :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 " NvimTreeOpen, NvimTreeClose, NvimTreeFocus and NvimTreeResize are also available if you need them
 
+" cycle between buffers
+nnoremap <silent><leader>. :BufferLineCycleNext<CR>
+nnoremap <silent><leader>, :BufferLineCyclePrev<CR>
