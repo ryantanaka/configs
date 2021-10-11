@@ -181,7 +181,6 @@ EOF
 
 " COLORSCHEME #################################################################
 set termguicolors
-let g:zenflesh_darkness='default'
 let g:zenflesh_lighten_noncurrent_window=v:true
 colorscheme zenflesh-lush
 
