@@ -1,25 +1,37 @@
  " PLUGINS #####################################################################
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/goyo.vim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'windwp/nvim-autopairs'
-Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'junegunn/goyo.vim' " focus mode
+Plug 'nvim-lua/plenary.nvim' " lua functions required by telescope and others
+Plug 'nvim-telescope/telescope.nvim' " fuzzy search + ripgrep
+Plug 'windwp/nvim-autopairs' " completes brackets, parenthesis, etc
+Plug 'lukas-reineke/indent-blankline.nvim' " show indent guide
 Plug 'tpope/vim-commentary' " gcc to cmt line (takes count), gc to comment target of motion (or visual)
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
-Plug 'EdenEast/nightfox.nvim'
-Plug 'ryanoasis/vim-devicons'
-Plug 'akinsho/bufferline.nvim'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'mbbill/undotree'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " parser generater used by other plugins and themes
+Plug 'EdenEast/nightfox.nvim' " love this colorscheme!
+Plug 'ryanoasis/vim-devicons' " icon pack 
+Plug 'akinsho/bufferline.nvim' " show my buffers at the top like tabs
+Plug 'kyazdani42/nvim-tree.lua' " file tree explorer
+Plug 'mbbill/undotree' " undotree visualizer
+Plug 'nvim-neorg/neorg' " org mode
 call plug#end()
 
 " SETUP #######################################################################
 " setup autopairs to autocomplete ({[ etc
 lua require('nvim-autopairs').setup{}
 
+" norg setup (required before tree-sitter setup)
 lua <<EOF
+local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+parser_configs.norg = {
+    install_info = {
+        url = "https://github.com/nvim-neorg/tree-sitter-norg",
+        files = { "src/parser.c", "src/scanner.cc" },
+        branch = "main"
+    },
+}
+
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"norg", "python", "bash"},
   highlight = {
     enable = true,
     custom_captures = {
@@ -180,6 +192,23 @@ require'nvim-tree'.setup {
 EOF
 
 lua require("bufferline").setup{}
+
+lua << EOF
+require('neorg').setup {
+    -- Tell Neorg what modules to load
+    load = {
+        ["core.defaults"] = {}, -- Load all the default modules
+        ["core.norg.concealer"] = {}, -- Allows for use of icons
+        ["core.norg.dirman"] = { -- Manage your directories with Neorg
+            config = {
+                workspaces = {
+                    my_workspace = "~/neorg"
+                }
+            }
+        }
+    },
+}
+EOF
 
 " COLORSCHEME #################################################################
 set termguicolors
