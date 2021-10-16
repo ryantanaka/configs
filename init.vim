@@ -333,3 +333,5 @@ nnoremap <silent><leader>, :BufferLineCyclePrev<CR>
 " enter last terminal command
 nnoremap <leader><silent>1 :execute "!!"<CR>
 
+" open vimrc in new buffer
+nnoremap <leader>v :e $MYVIMRC<CR>
