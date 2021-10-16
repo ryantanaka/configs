@@ -329,3 +329,7 @@ nnoremap <leader>n :NvimTreeFindFile<CR>
 " cycle between buffers
 nnoremap <silent><leader>. :BufferLineCycleNext<CR>
 nnoremap <silent><leader>, :BufferLineCyclePrev<CR>
+
+" enter last terminal command
+nnoremap <leader><silent>1 :execute "!!"<CR>
+
