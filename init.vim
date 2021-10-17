@@ -335,3 +335,18 @@ nnoremap <leader><silent>1 :execute "!!"<CR>
 
 " open vimrc in new buffer
 nnoremap <leader>v :e $MYVIMRC<CR>
+
+" python3 scratch file setup
+let HOME = $HOME
+let PYSCRATCH_DIR = $HOME . "/.py-scratch"
+let PYSCRATCH_FILE = PYSCRATCH_DIR . "/scratch.py"
+echo PYSCRATCH_FILE
+if !isdirectory(PYSCRATCH_DIR)
+    call mkdir(PYSCRATCH_DIR, "", 0770)
+endif
+if !filereadable(PYSCRATCH_FILE)
+    call writefile(["#!/usr/bin/env python3"], expand(PYSCRATCH_FILE))
+endif
+nnoremap <expr> <leader>s ":e " . PYSCRATCH_FILE . "<CR>"
+
+
