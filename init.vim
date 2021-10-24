@@ -349,4 +349,20 @@ if !filereadable(PYSCRATCH_FILE)
 endif
 nnoremap <expr> <leader>s ":e " . PYSCRATCH_FILE . "<CR>"
 
+" execute current buffer as python3 script 
+:function RunCurrentBufferAsPythonScript()
+:  let file_ext = tolower(expand('%:e'))
+:  if file_ext == "py"
+:    execute "! python3 %" 
+:  else
+:    echohl WarningMsg
+:    echo "Warning"
+:    echohl None
+:    echon ": no .py extension detected, won't run as python3 script"
+:  endif
+:endfunction
+
+" invoke buffer as python3 script
+nnoremap <leader>2 :call RunCurrentBufferAsPythonScript()<CR>
+
 
