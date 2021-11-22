@@ -1,6 +1,5 @@
  " PLUGINS #####################################################################
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/goyo.vim' " focus mode
 Plug 'nvim-lua/plenary.nvim' " lua functions required by telescope and others
 Plug 'nvim-telescope/telescope.nvim' " fuzzy search + ripgrep
 Plug 'windwp/nvim-autopairs' " completes brackets, parenthesis, etc
@@ -13,9 +12,12 @@ Plug 'akinsho/bufferline.nvim' " show my buffers at the top like tabs
 Plug 'kyazdani42/nvim-tree.lua' " file tree explorer
 Plug 'mbbill/undotree' " undotree visualizer
 Plug 'nvim-neorg/neorg' " org mode
+Plug 'folke/zen-mode.nvim' " focus mode (similar to Goyo)
 call plug#end()
 
 " SETUP #######################################################################
+lua require("zen-mode").setup{}
+
 " setup autopairs to autocomplete ({[ etc
 lua require('nvim-autopairs').setup{}
 
@@ -286,8 +288,8 @@ let g:indent_blankline_enabled = v:false
 " toggle indent guide
 nnoremap <silent><leader>i :IndentBlanklineToggle<CR>
 
-" start up Goyo (focus mode) 
-nnoremap <silent><leader>g :Goyo<CR>
+" start up zen mode (focus mode) 
+nnoremap <silent><leader>z :ZenMode<CR>
 
 " convenient buffer switching (hit TAB to cycle through tabs)
 nnoremap <leader>b :b<SPACE>
