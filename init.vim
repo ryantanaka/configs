@@ -14,7 +14,7 @@ call plug#end()
 
 " COLORSCHEME #################################################################
 set termguicolors
-colorscheme nordfox
+colorscheme nordfox 
 
 " SETUP #######################################################################
 lua require("zen-mode").setup{}
@@ -51,7 +51,11 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 lua <<EOF
-require('bufferline').setup {}
+require('bufferline').setup {
+    options = {
+            numbers = "ordinal"
+        }
+}
 EOF
 
 " CONFIGURATION ###############################################################
@@ -110,9 +114,6 @@ nnoremap <silent><leader>i :IndentBlanklineToggle<CR>
 " start up zen mode (focus mode) 
 nnoremap <silent><leader>z :ZenMode<CR>
 
-" convenient buffer switching (hit TAB to cycle through tabs)
-nnoremap <leader>b :b<SPACE>
-
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fd :Telescope find_files cwd=
@@ -143,13 +144,23 @@ nnoremap <silent> <leader>= :wincmd = <CR>
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
 
-
 " cycle between buffers
-nnoremap <silent><leader>. :bn<CR>
-nnoremap <silent><leader>, :bp<CR>
+nnoremap <silent><leader>. :BufferLineCycleNext<CR>
+nnoremap <silent><leader>, :BufferLineCyclePrev<CR>
+
+" Go to buffer based on ordinal number
+nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 
 " enter last terminal command
-nnoremap <leader>1 :execute "!!"<CR>
+nnoremap <leader><F1> :execute "!!"<CR>
 
 " open vimrc in new buffer
 nnoremap <leader>v :e $MYVIMRC<CR>
@@ -181,6 +192,6 @@ nnoremap <expr> <leader>s ":e " . PYSCRATCH_FILE . "<CR>"
 :endfunction
 
 " invoke buffer as python3 script
-nnoremap <leader>2 :call RunCurrentBufferAsPythonScript()<CR>
+nnoremap <leader><F2> :call RunCurrentBufferAsPythonScript()<CR>
 
 
