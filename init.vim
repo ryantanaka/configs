@@ -22,34 +22,6 @@ lua require("zen-mode").setup{}
 " setup autopairs to autocomplete ({[ etc
 lua require('nvim-autopairs').setup{}
 
-" norg setup (required before tree-sitter setup)
-lua <<EOF
-local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-parser_configs.norg = {
-    install_info = {
-        url = "https://github.com/nvim-neorg/tree-sitter-norg",
-        files = { "src/parser.c", "src/scanner.cc" },
-        branch = "main"
-    },
-}
-
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"norg", "python", "bash"},
-  highlight = {
-    enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
-EOF
-
 lua <<EOF
 require('bufferline').setup {
     options = {
