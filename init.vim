@@ -6,15 +6,19 @@ Plug 'windwp/nvim-autopairs' " completes brackets, parenthesis, etc
 Plug 'lukas-reineke/indent-blankline.nvim' " show indent guide
 Plug 'tpope/vim-commentary' " gcc to cmt line (takes count), gc to comment target of motion (or visual)
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " parser generater used by other plugins and themes
+Plug 'nvim-treesitter/nvim-treesitter-context' " sticky scroll
 Plug 'EdenEast/nightfox.nvim' " love this colorscheme!
+Plug 'sainnhe/sonokai'
 Plug 'folke/zen-mode.nvim' " focus mode (similar to Goyo)
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 call plug#end()
 
 " COLORSCHEME #################################################################
 set termguicolors
-colorscheme nordfox 
+let g:sonokai_style='shusia'
+colorscheme sonokai
 
 " SETUP #######################################################################
 lua require("zen-mode").setup{}
@@ -28,6 +32,11 @@ require('bufferline').setup {
             numbers = "ordinal"
         }
 }
+EOF
+
+" setup nvim tree
+lua <<EOF
+require("nvim-tree").setup()
 EOF
 
 " CONFIGURATION ###############################################################
@@ -80,8 +89,14 @@ nnoremap <silent><leader>r :call ToggleLineNumbers()<CR>
 
 " set indent guide to off by default
 let g:indent_blankline_enabled = v:false
+"
+" toggle nvim tree
+nnoremap <silent><leader>t :NvimTreeToggle<CR>
 " toggle indent guide
 nnoremap <silent><leader>i :IndentBlanklineToggle<CR>
+
+" toggle nvim tree
+nnoremap <silent><leader>t :NvimTreeToggle<CR>
 
 " start up zen mode (focus mode) 
 nnoremap <silent><leader>z :ZenMode<CR>
