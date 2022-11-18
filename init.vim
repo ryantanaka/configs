@@ -23,7 +23,13 @@ colorscheme sonokai
 " -- disable netrw at the very start of your init.lua (strongly advised)
 lua vim.g.loaded_netrw = 1
 lua vim.g.loaded_netrwPlugin = 1
-lua require("nvim-tree").setup{}
+lua <<EOF
+require("nvim-tree").setup{
+    disable_netrw = true,
+    hijack_netrw = true,
+    open_on_setup = false,
+}
+EOF
 
 lua require("zen-mode").setup{}
 
