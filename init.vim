@@ -6,63 +6,26 @@ Plug 'windwp/nvim-autopairs' " completes brackets, parenthesis, etc
 Plug 'lukas-reineke/indent-blankline.nvim' " show indent guide
 Plug 'tpope/vim-commentary' " gcc to cmt line (takes count), gc to comment target of motion (or visual)
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " parser generater used by other plugins and themes
+Plug 'nvim-treesitter/nvim-treesitter-context' " sticky scroll
 Plug 'EdenEast/nightfox.nvim' " love this colorscheme!
+Plug 'sainnhe/sonokai'
 Plug 'folke/zen-mode.nvim' " focus mode (similar to Goyo)
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-Plug 'sainnhe/sonokai'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
-Plug 'nvim-tree/nvim-tree.lua'
 call plug#end()
 
 " COLORSCHEME #################################################################
 set termguicolors
+let g:sonokai_style='shusia'
 colorscheme sonokai
 
 " SETUP #######################################################################
-" -- disable netrw at the very start of your init.lua (strongly advised)
-lua vim.g.loaded_netrw = 1
-lua vim.g.loaded_netrwPlugin = 1
-lua <<EOF
-require("nvim-tree").setup{
-    disable_netrw = true,
-    hijack_netrw = true,
-    open_on_setup = false,
-}
-EOF
-
+" TODO: completely convert to LUA??
 lua require("zen-mode").setup{}
 
 " setup autopairs to autocomplete ({[ etc
 lua require('nvim-autopairs').setup{}
-
-" norg setup (required before tree-sitter setup)
-lua <<EOF
-local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-parser_configs.norg = {
-    install_info = {
-        url = "https://github.com/nvim-neorg/tree-sitter-norg",
-        files = { "src/parser.c", "src/scanner.cc" },
-        branch = "main"
-    },
-}
-
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"norg", "python", "bash"},
-  highlight = {
-    enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
-EOF
 
 lua <<EOF
 require('bufferline').setup {
@@ -70,6 +33,15 @@ require('bufferline').setup {
             numbers = "ordinal"
         }
 }
+EOF
+
+" setup nvim tree
+lua <<EOF
+require("nvim-tree").setup()
+EOF
+
+lua <<EOF
+require("treesitter-context").setup{}
 EOF
 
 " CONFIGURATION ###############################################################
@@ -90,15 +62,7 @@ set ruler
 set number
 set incsearch
 
-" keep an undo directory
-if !isdirectory($HOME."/.nvim")
-    call mkdir($HOME."/.nvim", "", 0770)
-endif
-if !isdirectory($HOME."/.nvim/undo-dir")
-    call mkdir($HOME."/.nvim/undo-dir", "", 0700)
-endif
-set undodir=~/.nvim/undodir
-set undofile
+" TODO: undodirectory??
 
 " let RipGrep derive root from git project root
 if executable('rg')
@@ -122,14 +86,17 @@ nnoremap <silent><leader>r :call ToggleLineNumbers()<CR>
 
 " set indent guide to off by default
 let g:indent_blankline_enabled = v:false
+"
+" toggle nvim tree
+nnoremap <silent><leader>t :NvimTreeToggle<CR>
 " toggle indent guide
 nnoremap <silent><leader>i :IndentBlanklineToggle<CR>
 
+" toggle nvim tree
+nnoremap <silent><leader>t :NvimTreeToggle<CR>
+
 " start up zen mode (focus mode) 
 nnoremap <silent><leader>z :ZenMode<CR>
-
-" toggle nvim-tree
-nnoremap <silent><leader>t :NvimTreeToggle<CR>
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -137,6 +104,9 @@ nnoremap <leader>fd :Telescope find_files cwd=
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" toggle tree sitter context
+nnoremap <silent><leader>c :TSContextToggle<CR>
 
 " set movement amongst splits
 nmap <silent> <c-k> :wincmd k<CR>
@@ -182,33 +152,6 @@ nnoremap <leader><F1> :execute "!!"<CR>
 " open vimrc in new buffer
 nnoremap <leader>v :e $MYVIMRC<CR>
 
-" python3 scratch file setup
-let HOME = $HOME
-let PYSCRATCH_DIR = $HOME . "/.py-scratch"
-let PYSCRATCH_FILE = PYSCRATCH_DIR . "/scratch.py"
-echo PYSCRATCH_FILE
-if !isdirectory(PYSCRATCH_DIR)
-    call mkdir(PYSCRATCH_DIR, "", 0770)
-endif
-if !filereadable(PYSCRATCH_FILE)
-    call writefile(["#!/usr/bin/env python3"], expand(PYSCRATCH_FILE))
-endif
-nnoremap <expr> <leader>s ":e " . PYSCRATCH_FILE . "<CR>"
-
-" execute current buffer as python3 script 
-:function RunCurrentBufferAsPythonScript()
-:  let file_ext = tolower(expand('%:e'))
-:  if file_ext == "py"
-:    execute "! python3 %" 
-:  else
-:    echohl WarningMsg
-:    echo "Warning"
-:    echohl None
-:    echon ": no .py extension detected, won't run as python3 script"
-:  endif
-:endfunction
-
-" invoke buffer as python3 script
-nnoremap <leader><F2> :call RunCurrentBufferAsPythonScript()<CR>
-
-
+" keep cursor centered when doing half page up or down
+nnoremap <silent><c-d> <c-d>zz
+nnoremap <silent><c-u> <c-u>zz
