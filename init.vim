@@ -8,7 +8,6 @@ Plug 'tpope/vim-commentary' " gcc to cmt line (takes count), gc to comment targe
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " parser generater used by other plugins and themes
 Plug 'nvim-treesitter/nvim-treesitter-context' " sticky scroll
 Plug 'EdenEast/nightfox.nvim' " love this colorscheme!
-Plug 'sainnhe/sonokai'
 Plug 'folke/zen-mode.nvim' " focus mode (similar to Goyo)
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'kyazdani42/nvim-tree.lua'
@@ -17,8 +16,7 @@ call plug#end()
 
 " COLORSCHEME #################################################################
 set termguicolors
-let g:sonokai_style = 'shusia'
-colorscheme sonokai
+colorscheme nordfox
 
 " SETUP #######################################################################
 lua require("zen-mode").setup{}
