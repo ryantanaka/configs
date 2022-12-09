@@ -7,17 +7,24 @@ Plug 'lukas-reineke/indent-blankline.nvim' " show indent guide
 Plug 'tpope/vim-commentary' " gcc to cmt line (takes count), gc to comment target of motion (or visual)
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " parser generater used by other plugins and themes
 Plug 'nvim-treesitter/nvim-treesitter-context' " sticky scroll
-Plug 'EdenEast/nightfox.nvim' " love this colorscheme!
+Plug 'EdenEast/nightfox.nvim'
 Plug 'folke/zen-mode.nvim' " focus mode (similar to Goyo)
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-Plug 'projekt0n/github-nvim-theme'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 call plug#end()
 
 " COLORSCHEME #################################################################
 set termguicolors
-colorscheme github_dimmed
+lua <<EOF
+require("nightfox").setup({
+    options = {
+            transparent = true
+        }
+})
+EOF
+colorscheme nordfox
 
 " SETUP #######################################################################
 lua require("zen-mode").setup{}
@@ -25,10 +32,9 @@ lua require("treesitter-context").setup{}
 lua require('nvim-autopairs').setup{}
 lua require("nvim-tree").setup{}
 lua require("treesitter-context").setup{}
-lua require("github-theme").setup{hide_inactive_statusline=true}
 
 lua <<EOF
-require('bufferline').setup {
+require('bufferline').setup({
     options = {
         numbers = "ordinal",
         offsets = {
@@ -40,7 +46,7 @@ require('bufferline').setup {
             }
         }
     }
-}
+})
 EOF
 
 " CONFIGURATION ###############################################################
@@ -132,8 +138,8 @@ nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
 
 " cycle between buffers
-nnoremap <silent><s-h> :BufferLineCycleNext<CR>
-nnoremap <silent><s-l> :BufferLineCyclePrev<CR>
+nnoremap <silent><s-h> :BufferLineCyclePrev<CR>
+nnoremap <silent><s-l> :BufferLineCycleNext<CR>
 
 
 " Go to buffer based on ordinal number
