@@ -24,6 +24,8 @@ colorscheme sonokai
 " TODO: completely convert to LUA??
 lua require("zen-mode").setup{}
 
+lua require("treesitter-context").setup{}
+
 " setup autopairs to autocomplete ({[ etc
 lua require('nvim-autopairs').setup{}
 
