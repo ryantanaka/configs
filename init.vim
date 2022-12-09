@@ -17,7 +17,7 @@ call plug#end()
 
 " COLORSCHEME #################################################################
 set termguicolors
-let g:sonokai_style='shusia'
+let g:sonokai_style = 'shusia'
 colorscheme sonokai
 
 " SETUP #######################################################################
