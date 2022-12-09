@@ -12,7 +12,6 @@ Plug 'folke/zen-mode.nvim' " focus mode (similar to Goyo)
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-Plug 'nvim-lualine/lualine.nvim'
 call plug#end()
 
 " COLORSCHEME #################################################################
@@ -25,7 +24,6 @@ lua require("treesitter-context").setup{}
 lua require('nvim-autopairs').setup{}
 lua require("nvim-tree").setup{}
 lua require("treesitter-context").setup{}
-lua require("lualine").setup{}
 
 lua <<EOF
 require('bufferline').setup {
