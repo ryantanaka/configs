@@ -30,15 +30,20 @@ lua require('nvim-autopairs').setup{}
 lua <<EOF
 require('bufferline').setup {
     options = {
-            numbers = "ordinal"
+        numbers = "ordinal",
+        offsets = {
+            {
+                filetype = "NvimTree",
+                text = "File Explorer",
+                highlight = "Directory",
+                separator = true -- use a "true" to enable the default, or set your own character
+            }
         }
+    }
 }
 EOF
 
-" setup nvim tree
-lua <<EOF
-require("nvim-tree").setup()
-EOF
+lua require("nvim-tree").setup{}
 
 lua <<EOF
 require("treesitter-context").setup{}
@@ -61,6 +66,7 @@ set relativenumber
 set ruler
 set number
 set incsearch
+set scrolloff=14
 
 " TODO: undodirectory??
 
@@ -132,8 +138,9 @@ nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
 
 " cycle between buffers
-nnoremap <silent><leader>. :BufferLineCycleNext<CR>
-nnoremap <silent><leader>, :BufferLineCyclePrev<CR>
+nnoremap <silent><s-h> :BufferLineCycleNext<CR>
+nnoremap <silent><s-l> :BufferLineCyclePrev<CR>
+
 
 " Go to buffer based on ordinal number
 nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
