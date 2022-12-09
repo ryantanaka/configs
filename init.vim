@@ -21,13 +21,11 @@ let g:sonokai_style='shusia'
 colorscheme sonokai
 
 " SETUP #######################################################################
-" TODO: completely convert to LUA??
 lua require("zen-mode").setup{}
-
 lua require("treesitter-context").setup{}
-
-" setup autopairs to autocomplete ({[ etc
 lua require('nvim-autopairs').setup{}
+lua require("nvim-tree").setup{}
+lua require("treesitter-context").setup{}
 
 lua <<EOF
 require('bufferline').setup {
@@ -43,12 +41,6 @@ require('bufferline').setup {
         }
     }
 }
-EOF
-
-lua require("nvim-tree").setup{}
-
-lua <<EOF
-require("treesitter-context").setup{}
 EOF
 
 " CONFIGURATION ###############################################################
