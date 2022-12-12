@@ -162,3 +162,7 @@ nnoremap <leader>v :e $MYVIMRC<CR>
 " keep cursor centered when doing half page up or down
 nnoremap <silent><c-d> <c-d>zz
 nnoremap <silent><c-u> <c-u>zz
+
+" easy exit of insert mode
+inoremap jk <esc>
+inoremap kj <esc>
