@@ -11,5 +11,14 @@
         "key": "k",
         "when": "neovim.mode == insert && editorTextFocus",
         "args": "k"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
     }
 ]
