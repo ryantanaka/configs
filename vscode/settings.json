@@ -1,4 +1,7 @@
 {
     "editor.cursorSurroundingLines": 5,
-    "editor.lineNumbers": "relative" 
+    "editor.lineNumbers": "relative",
+    "terminal.integrated.commandsToSkipShell": [
+        "-workbench.action.quickOpen"
+    ]
 }
