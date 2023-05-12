@@ -161,4 +161,3 @@ nnoremap <silent><c-u> <c-u>zz
 
 " easy exit of insert mode
 inoremap jk <esc>
-inoremap kj <esc>
