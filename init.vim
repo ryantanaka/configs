@@ -8,6 +8,8 @@ Plug 'tpope/vim-commentary' " gcc to cmt line (takes count), gc to comment targe
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " parser generater used by other plugins and themes
 Plug 'nvim-treesitter/nvim-treesitter-context' " sticky scroll
 Plug 'EdenEast/nightfox.nvim'
+Plug 'rebelot/kanagawa.nvim'
+Plug 'folke/tokyonight.nvim'
 Plug 'folke/zen-mode.nvim' " focus mode (similar to Goyo)
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'kyazdani42/nvim-tree.lua'
@@ -17,14 +19,7 @@ call plug#end()
 
 " COLORSCHEME #################################################################
 set termguicolors
-lua <<EOF
-require("nightfox").setup({
-    options = {
-            transparent = true
-        }
-})
-EOF
-colorscheme nordfox
+colorscheme kanagawa-wave
 
 " SETUP #######################################################################
 lua require("zen-mode").setup{}
@@ -32,6 +27,14 @@ lua require("treesitter-context").setup{}
 lua require('nvim-autopairs').setup{}
 lua require("nvim-tree").setup{}
 lua require("treesitter-context").setup{}
+lua <<EOF
+require('nvim-treesitter.configs').setup({
+    ensure_installed = {"python", "vim"},
+    highlight = {
+        enable = true
+    }
+})
+EOF
 
 lua <<EOF
 require('bufferline').setup({
@@ -66,9 +69,7 @@ set relativenumber
 set ruler
 set number
 set incsearch
-set scrolloff=14
-
-" TODO: undodirectory??
+set scrolloff=5
 
 " let RipGrep derive root from git project root
 if executable('rg')
@@ -105,11 +106,9 @@ nnoremap <silent><leader>t :NvimTreeToggle<CR>
 nnoremap <silent><leader>z :ZenMode<CR>
 
 " Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fd :Telescope find_files cwd=
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>p <cmd>Telescope find_files<cr>
+nnoremap <leader>g <cmd>Telescope live_grep<cr>
 
 " toggle tree sitter context
 nnoremap <silent><leader>c :TSContextToggle<CR>
@@ -152,9 +151,6 @@ nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
 nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
 nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
 nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
-
-" enter last terminal command
-nnoremap <leader><F1> :execute "!!"<CR>
 
 " open vimrc in new buffer
 nnoremap <leader>v :e $MYVIMRC<CR>
