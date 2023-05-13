@@ -19,7 +19,14 @@ call plug#end()
 
 " COLORSCHEME #################################################################
 set termguicolors
-colorscheme kanagawa-wave
+lua <<EOF
+require('nightfox').setup({
+    options = {
+        transparent = true         
+    }
+})
+EOF
+colorscheme nightfox
 
 " SETUP #######################################################################
 lua require("zen-mode").setup{}
@@ -40,6 +47,11 @@ lua <<EOF
 require('bufferline').setup({
     options = {
         numbers = "ordinal",
+        buffer_close_icon = '󰅖',
+        modified_icon = '●',
+        close_icon = '',
+        left_trunc_marker = '',
+        right_trunc_marker = '',
         offsets = {
             {
                 filetype = "NvimTree",
