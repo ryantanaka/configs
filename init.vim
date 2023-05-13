@@ -15,6 +15,7 @@ Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'nvim-lualine/lualine.nvim'
 call plug#end()
 
 " COLORSCHEME #################################################################
@@ -42,6 +43,8 @@ require('nvim-treesitter.configs').setup({
     }
 })
 EOF
+
+lua require("lualine").setup{}
 
 lua <<EOF
 require('bufferline').setup({
