@@ -85,6 +85,8 @@ set ruler
 set number
 set incsearch
 set scrolloff=5
+" disabling because we are using lualine to show mode
+set noshowmode
 
 " let RipGrep derive root from git project root
 if executable('rg')
