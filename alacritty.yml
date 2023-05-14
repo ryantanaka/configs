@@ -4,9 +4,11 @@ font:
     style: Regular
 
 window:
-  opacity: 0.85
+  decorations: buttonless
+  # opacity: 0.85
   padding:
     x: 5
+    y: 5
 
 # Nightfox Alacritty Colors
 # Style: terafox
