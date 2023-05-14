@@ -23,14 +23,26 @@ set termguicolors
 lua <<EOF
 require('nightfox').setup({
     options = {
-        transparent = true         
+        transparent = false         
     }
 })
 EOF
-colorscheme nightfox
+colorscheme terafox
 
 " SETUP #######################################################################
 lua require("zen-mode").setup{}
+
+lua <<EOF
+require("zen-mode").setup({
+    window = {
+        backdrop = 0.8
+    },
+    alacritty = {
+        enabled = true
+    }
+})
+EOF
+
 lua require("treesitter-context").setup{}
 lua require('nvim-autopairs').setup{}
 lua require("nvim-tree").setup{}
